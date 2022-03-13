@@ -26,6 +26,8 @@ with open(script_dir + "/lacrossegw.conf") as jfile:
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-m", "--module", type=int, metavar="1-4", help=u"RaspyRFM module 1-4", default=0)
+# add second REQUIRED argument for MQTT broker IP address
+parser.add_argument("-b", "--broker", type=str, help="MQTT Broker IP-address", required=True)
 args = parser.parse_args()
 
 if args.module > 0:
@@ -71,7 +73,7 @@ except Exception as ex:
 try:
     import paho.mqtt.client as mqtt
     mqttClient = mqtt.Client()
-    mqttClient.connect("localhost", 1883, 60)
+    mqttClient.connect(args.broker, 1883, 60)
     mqttClient.loop_start()
 except:
     mqttClient = None
