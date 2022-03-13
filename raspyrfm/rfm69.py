@@ -179,7 +179,8 @@ class Rfm69(rfmbase.RfmBase):
 		print("RFM69 found on CS " + str(cs), file=sys.stderr)
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setup(gpio_int, GPIO.IN)
-		GPIO.add_event_detect(gpio_int, GPIO.RISING, callback=self.__rfm_irq)
+		# disbled - causing errors on Homeassistant Add-On
+		#GPIO.add_event_detect(gpio_int, GPIO.RISING, callback=self.__rfm_irq)
 
 		self.__set_mode(MODE_STDBY)
 		config = {}
