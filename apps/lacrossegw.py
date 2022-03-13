@@ -75,6 +75,7 @@ try:
     mqttClient = mqtt.Client()
     mqttClient.connect(args.broker, 1883, 60)
     mqttClient.loop_start()
+    print("connected to mqtt broker")
 except:
     mqttClient = None
     print("mqtt init error")
